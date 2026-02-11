@@ -94,46 +94,124 @@ function memoryGame() {
 }
 
 /* ======================
-   LEVEL 2 – QUIZ
+   LEVEL 2 – QUIZ (MULTIPLE CHOICE)
 ====================== */
 function quizGame() {
     document.getElementById("gameTitle").innerText = "Romantic Quiz 💖";
 
     const questions = [
-        { q: "Bulan jadian kita?", a: "April" },
-        { q: "Siapa yang suka sedih?", a: "Aplia" },
-        { q: "Siapa yang si paling tidak seru?", a: "Wendy" },
-        { q: "Siapa yang paling sering bete?", a: "Aplia" },
-        { q: "Siapa orang favoritku di dunia?", a: "Aplia" }
+        {
+            q: "💕 Di bulan apa kita resmi jadian?",
+            options: ["Maret", "April", "Mei"],
+            a: 1
+        },
+        {
+            q: "🌹 Siapa yang paling sering bikin suasana jadi hangat duluan?",
+            options: ["Wendy", "Dua-duanya sama", "Aplia"],
+            a: 1
+        },
+        {
+            q: "💌 Apa yang paling Wendy suka dari Aplia?",
+            options: ["Caranya perhatian", "Senyum & tawanya", "Semua hal tentangnya"],
+            a: 2
+        },
+        {
+            q: "🌙 Kalau lagi kangen, Aplia biasanya...",
+            options: ["Diam tapi mellow", "Langsung bilang kangen", "Pura-pura sibuk padahal nungguin chat"],
+            a: 0
+        },
+        {
+            q: "🌸 Apa hal kecil dari Wendy yang paling bikin Aplia senyum sendiri?",
+            options: ["Cara dia bilang 'aku sayang kamu'", "Tiba-tiba kirim video random", "Perhatiin hal kecil yang jarang orang sadarin"],
+            a: 2
+        },
+        {
+            q: "❤️ Siapa orang paling spesial di dunia Wendy?",
+            options: ["Rahasia deh", "Aplia, dong", "Sudah tau lah ya"],
+            a: 1
+        }
     ];
 
     let index = 0;
+    let selected = null;
 
     const container = document.createElement("div");
-    const question = document.createElement("p");
-    const input = document.createElement("input");
-    const btn = document.createElement("button");
+    container.className = "quiz-container";
 
-    input.placeholder = "Jawaban kamu...";
-    btn.innerText = "Submit";
+    const questionEl = document.createElement("p");
+    questionEl.className = "quiz-question";
 
-    btn.onclick = () => {
-        if (input.value.toLowerCase() === questions[index].a.toLowerCase()) {
-            index++;
-            input.value = "";
-            if (index < questions.length) {
-                question.innerText = questions[index].q;
-            } else finishLevel();
+    const optionsEl = document.createElement("div");
+    optionsEl.className = "quiz-options";
+
+    const feedback = document.createElement("p");
+    feedback.className = "quiz-feedback";
+
+    const btnNext = document.createElement("button");
+    btnNext.innerText = "Lanjut →";
+    btnNext.className = "quiz-next hidden";
+
+    const progress = document.createElement("p");
+    progress.className = "quiz-progress";
+
+    function renderQuestion() {
+        selected = null;
+        feedback.innerText = "";
+        btnNext.classList.add("hidden");
+        optionsEl.innerHTML = "";
+
+        const current = questions[index];
+        questionEl.innerText = current.q;
+        progress.innerText = `Soal ${index + 1} dari ${questions.length}`;
+
+        current.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.className = "quiz-option";
+            btn.innerText = ["🅐", "🅑", "🅒"][i] + "  " + opt;
+
+            btn.onclick = () => {
+                if (selected !== null) return;
+                selected = i;
+
+                // Tandai semua opsi
+                document.querySelectorAll(".quiz-option").forEach((b, bi) => {
+                    b.disabled = true;
+                    if (bi === current.a) {
+                        b.classList.add("correct");
+                    } else if (bi === i && i !== current.a) {
+                        b.classList.add("wrong");
+                    }
+                });
+
+                if (i === current.a) {
+                    feedback.innerText = ["Yeay betul! 🎉", "Kamu tau aku banget! 💕", "Benar! ❤️"][Math.floor(Math.random() * 3)];
+                    feedback.style.color = "#ff4d88";
+                } else {
+                    feedback.innerText = ["Eh salah~ 😝", "Hmm, coba inget lagi 🥺", "Bukan itu sayang~ 💔"][Math.floor(Math.random() * 3)];
+                    feedback.style.color = "#e05c8a";
+                }
+
+                btnNext.classList.remove("hidden");
+            };
+
+            optionsEl.appendChild(btn);
+        });
+    }
+
+    btnNext.onclick = () => {
+        index++;
+        if (index < questions.length) {
+            renderQuestion();
         } else {
-            alert("Salah 😝");
+            finishLevel();
         }
     };
 
-    question.innerText = questions[0].q;
-    container.append(question, input, btn);
-
+    container.append(progress, questionEl, optionsEl, feedback, btnNext);
     document.getElementById("gameContent").innerHTML = "";
     document.getElementById("gameContent").appendChild(container);
+
+    renderQuestion();
 }
 
 /* ======================
