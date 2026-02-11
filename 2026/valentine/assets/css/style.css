@@ -1,0 +1,446 @@
+/* 🌸 BASIC */
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #ffd6e8, #fff);
+    color: #b03060;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* 🖥 SCREEN SYSTEM */
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 20px;
+    animation: fadeIn 0.8s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* 💖 BUTTON */
+button {
+    padding: 14px 28px;
+    border-radius: 30px;
+    border: none;
+    background: #ff7aa2;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    background: #ff4d88;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background: #f2a1bb;
+    cursor: not-allowed;
+}
+
+/* 🗺 MAP */
+.levels {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: auto;
+}
+
+/* 🃏 GAME */
+#gameContent {
+    margin-top: 30px;
+}
+
+/* 🃏 MEMORY CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 70px);
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    width: 70px;
+    height: 70px;
+    background: #ffb6c1;
+    border-radius: 10px;
+    font-size: 30px;
+    line-height: 70px;
+    cursor: pointer;
+}
+
+/* ❤️ FLOATING HEARTS */
+#hearts span {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 480px) {
+    .cards {
+        grid-template-columns: repeat(3, 70px);
+    }
+}
+
+#typing-text {
+    max-width: 600px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: auto;
+}
+
+.memory {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+}
+
+.memory.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none;
+}
+
+.countdown-subtitle {
+    font-size: 0.95rem;
+    color: #c2547a;
+    margin: 8px 0 20px;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+}
+
+/* ⏱ COUNTDOWN ENDING */
+.countdown-ending {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px auto 28px;
+    flex-wrap: wrap;
+}
+
+.countdown-ending .cd-box {
+    background: white;
+    border-radius: 14px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 12px rgba(255, 100, 150, 0.2);
+    min-width: 70px;
+}
+
+.countdown-ending .cd-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ff4d88;
+    line-height: 1;
+}
+
+.countdown-ending .cd-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #c2547a;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 💌 WISH LETTER */
+.letter-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* Envelope */
+.letter-envelope {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: pulse 1.8s ease-in-out infinite;
+}
+
+.letter-envelope:hover {
+    transform: scale(1.05);
+}
+
+.envelope-flap {
+    width: 0;
+    height: 0;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-top: 80px solid #ff7aa2;
+    margin: auto;
+}
+
+.envelope-body {
+    width: 240px;
+    height: 160px;
+    background: #ffb6d9;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(255, 100, 150, 0.3);
+}
+
+.envelope-body span {
+    font-size: 2.5rem;
+}
+
+.envelope-body p {
+    font-size: 0.85rem;
+    color: #b03060;
+    margin: 0;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+/* Letter Paper */
+.letter-content {
+    max-width: 480px;
+    margin: auto;
+}
+
+.letter-paper {
+    background: #fffaf9;
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 8px 30px rgba(255, 100, 150, 0.15);
+    border: 1px solid #ffd6e8;
+    font-family: 'Georgia', serif;
+    animation: unfold 0.8s ease;
+}
+
+@keyframes unfold {
+    from {
+        opacity: 0;
+        transform: scaleY(0.3) translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(1) translateY(0);
+    }
+}
+
+.letter-title {
+    font-size: 1.3rem;
+    color: #ff4d88;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+
+/* Wish Items */
+.wish-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+
+.wish-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.6s ease;
+}
+
+.wish-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wish-icon {
+    font-size: 1.3rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.wish-text {
+    font-size: 1rem;
+    color: #8b3a62;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.letter-closing {
+    margin-top: 28px;
+    font-size: 0.95rem;
+    color: #c2547a;
+    font-style: italic;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.letter-closing.show {
+    opacity: 1;
+}
+
+/* Tombol wish di ending */
+#btn-wish {
+    margin-top: 30px;
+    animation: fadeIn 1s ease;
+}
+
+/* 📸 POLAROID WALL */
+.polaroid-wall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    max-width: 780px;
+    margin: 30px auto 40px;
+    padding: 0 16px;
+}
+
+.polaroid {
+    background: white;
+    padding: 12px 12px 40px;
+    border-radius: 4px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    width: 160px;
+    opacity: 0;
+    transform: translateY(30px) rotate(0deg);
+    transition: all 0.6s ease;
+    cursor: pointer;
+}
+
+.polaroid.show {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rotate));
+}
+
+.polaroid:hover {
+    transform: translateY(-8px) rotate(0deg) scale(1.05) !important;
+    box-shadow: 0 12px 30px rgba(255, 100, 150, 0.3);
+    z-index: 10;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+}
+
+.polaroid-caption {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: #b03060;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .polaroid {
+        width: 130px;
+    }
+
+    .polaroid img {
+        height: 110px;
+    }
+}
+
+/* ⏳ LOADING SCREEN */
+.loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 20px;
+}
+
+.loading-heart {
+    font-size: 4rem;
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    color: #c2547a;
+    font-style: italic;
+    min-height: 1.5rem;
+    letter-spacing: 0.5px;
+}
