@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Our Love Journey ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+    <section id="loading" class="screen">
+        <div class="loading-wrapper">
+            <div class="loading-heart">💗</div>
+            <p class="loading-text" id="loadingText"></p>
+        </div>
+    </section>
+
+    <audio id="bg-music" loop>
+        <source src="assets/audio/tenderness.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ❤️ Floating Hearts -->
+    <div id="hearts"></div>
+
+    <!-- 🎮 LANDING PAGE -->
+    <section id="landing" class="screen active">
+        <h1>Our Love Journey ❤️</h1>
+        <p>Sebuah perjalanan kecil tentang kita</p>
+
+        <p id="countdown-landing" class="countdown-subtitle"></p>
+        <button onclick="startGame()">Start Game 💕</button>
+    </section>
+
+    <!-- 🗺 JOURNEY MAP -->
+    <section id="map" class="screen">
+        <h2>Journey Map</h2>
+        <p>Kamu siap untuk kejutan kecil hari ini? 💌</p>
+        <div class="levels">
+            <button id="level1" onclick="openGame(1)">Level 1 💌</button>
+            <button id="level2" onclick="openGame(2)" disabled>Level 2 💖</button>
+            <button id="level3" onclick="openGame(3)" disabled>Level 3 💞</button>
+            <button id="level4" onclick="goToEnding()" disabled>Ending 💗</button>
+        </div>
+    </section>
+
+    <!-- 🃏 GAME AREA -->
+    <section id="game" class="screen">
+        <h2 id="gameTitle"></h2>
+        <div id="gameContent"></div>
+    </section>
+
+    <!-- 📸 MEMORY -->
+    <section id="memory" class="screen">
+        <h2>Memories 💕</h2>
+        <p>Setiap langkah membawa kita lebih dekat 🌸</p>
+        <div class="timeline" id="timeline"></div>
+        <br>
+        <button onclick="showScreen('map')">Lanjut ❤️</button>
+
+    </section>
+
+    <!-- 💘 ENDING -->
+    <section id="ending" class="screen">
+        <h1>Happy Valentine ❤️</h1>
+
+        <div id="countdown-ending" class="countdown-ending"></div>
+
+        <div id="typing-text">
+            Terima kasih sudah Untuk selalu membuat hariku lebih indah 💕
+        </div>
+
+        <br>
+        <button id="btn-polaroid-wall" onclick="showScreen('polaroid'); startPolaroid()" class="hidden">Lihat Momen Kita
+            📸</button>
+    </section>
+
+    <section id="polaroid" class="screen">
+        <h2>Our Moments 📸</h2>
+        <p>Setiap foto menyimpan cerita yang tak terlupakan 🌸</p>
+        <div class="polaroid-wall" id="polaroidWall"></div>
+
+        <button id="btn-wish" class="hidden" onclick="showScreen('wish'); startWishLetter()">
+            Doa & Harapan 💌
+        </button>
+    </section>
+    <!-- WISH / DOA BERSAMA -->
+    <section id="wish" class="screen">
+        <div class="letter-wrapper">
+            <div class="letter-envelope" id="envelope" onclick="openLetter()">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <span>💌</span>
+                    <p>Ketuk untuk membuka</p>
+                </div>
+            </div>
+
+            <div class="letter-content hidden" id="letterContent">
+                <div class="letter-paper">
+                    <h3 class="letter-title">Doa & Harapan Kita 🌸</h3>
+                    <div class="wish-list" id="wishList"></div>
+                    <p class="letter-closing">Dengan sepenuh hati, selalu. ❤️</p>
+                </div>
+
+                <br>
+                <button onclick="showScreen('final')">Lanjut 🎁</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🎁 FINAL SURPRISE -->
+    <section id="final" class="screen">
+        <div class="final-wrapper">
+            <!-- Gift Box (sebelum dibuka) -->
+            <div class="gift-box" id="giftBox" onclick="openGift()">
+                <div class="gift-lid">
+                    <div class="gift-bow">🎀</div>
+                </div>
+                <div class="gift-body">🎁</div>
+                <p class="gift-hint">Ketuk untuk membuka 💕</p>
+            </div>
+
+            <!-- Pesan Surprise (setelah dibuka) -->
+            <div class="final-message hidden" id="finalMessage">
+                <h2 class="final-title">For You, My Love ❤️</h2>
+                <div class="final-content" id="finalContent"></div>
+                <button class="final-btn" onclick="restartJourney()">Mulai Lagi dari Awal 🔄</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="assets/js/loading.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/polaroid_wall.js"></script>
+    <script src="assets/js/countdown.js"></script>
+    <script src="assets/js/wish.js"></script>
+    <script src="assets/js/timeline.js"></script>
+    <script src="assets/js/final.js"></script>
+</body>
+
+</html>
