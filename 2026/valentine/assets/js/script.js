@@ -121,19 +121,40 @@ function quizGame() {
             a: 0
         },
         {
-            q: "🌸 Apa hal kecil dari Wendy yang paling bikin Aplia senyum sendiri?",
-            options: ["Cara dia bilang 'aku sayang kamu'", "Tiba-tiba kirim video random", "Perhatiin hal kecil yang jarang orang sadarin"],
+            q: "❤️ Siapa orang paling spesial di dunia Wendy?",
+            options: ["Rahasia deh", "Emang ada ?", "Sudah tau lah ya"],
             a: 2
         },
         {
-            q: "❤️ Siapa orang paling spesial di dunia Wendy?",
-            options: ["Rahasia deh", "Aplia, dong", "Sudah tau lah ya"],
+            q: "😄 Kalau lagi berantem kecil, siapa yang biasanya minta maaf duluan?",
+            options: ["Wendy yang duluan", "Aplia yang duluan", "Keduanya berani memulai duluan"],
+            a: 2
+        },
+        {
+            q: "🌸 Apa hal kecil dari Wendy yang paling bikin Aplia senyum sendiri?",
+            options: ["Cara dia bilang 'aku sayang kamu'", "Tiba-tiba kirim meme random", "Perhatiin hal kecil yang jarang orang sadarin"],
+            a: 2
+        },
+        {
+            q: "🍜 Kalau lagi makan bareng, Wendy paling sering...",
+            options: ["Suapin duluan sebelum makan sendiri", "Ngajak Ketawa bersama", "Makan lahap tapi tetap lucu"],
+            a: 2
+        },
+        {
+            q: "💬 Kalimat yang paling sering Wendy kirim ke Aplia?",
+            options: ["Lagi ngapain?", "Udah makan belum?", "Aku kangen kamu"],
+            a: 2
+        },
+        {
+            q: "🌟 Apa satu kata yang paling cocok buat menggambarkan hubungan kita?",
+            options: ["Hangat", "Rumah", "Bahagia"],
             a: 1
         }
     ];
 
     let index = 0;
     let selected = null;
+    let score = 0; // Tambahan: hitung skor
 
     const container = document.createElement("div");
     container.className = "quiz-container";
@@ -184,6 +205,7 @@ function quizGame() {
                 });
 
                 if (i === current.a) {
+                    score++; // Tambah skor kalau benar
                     feedback.innerText = ["Yeay betul! 🎉", "Kamu tau aku banget! 💕", "Benar! ❤️"][Math.floor(Math.random() * 3)];
                     feedback.style.color = "#ff4d88";
                 } else {
@@ -203,7 +225,7 @@ function quizGame() {
         if (index < questions.length) {
             renderQuestion();
         } else {
-            finishLevel();
+            showQuizResult(score, questions.length);
         }
     };
 
@@ -214,6 +236,61 @@ function quizGame() {
     renderQuestion();
 }
 
+/* ======================
+   QUIZ RESULT PAGE
+====================== */
+function showQuizResult(score, total) {
+    const percentage = Math.round((score / total) * 100);
+    const passed = score >= 7; // Minimal 7 dari 10
+
+    const container = document.createElement("div");
+    container.className = "quiz-result";
+
+    const scoreEl = document.createElement("div");
+    scoreEl.className = "quiz-score";
+    scoreEl.innerHTML = `
+        <div class="score-number">${score}/${total}</div>
+        <div class="score-percentage">${percentage}%</div>
+    `;
+
+    const message = document.createElement("p");
+    message.className = "quiz-message";
+
+    const btnAction = document.createElement("button");
+    btnAction.className = "quiz-action-btn";
+
+    if (passed) {
+        // LULUS
+        let msg = "";
+        if (score === 10) {
+            msg = "Sempurna! Kamu tau aku lebih dari aku tau diriku sendiri 🥰💕";
+        } else if (score === 9) {
+            msg = "Hampir sempurna! Kamu emang spesial banget buat aku ❤️✨";
+        } else if (score === 8) {
+            msg = "Keren! Kamu perhatian banget sama detail kecil tentang kita 💖";
+        } else {
+            msg = "Good job sayang! Kamu emang paham aku kok 🌸💕";
+        }
+        message.innerText = msg;
+        btnAction.innerText = "Lanjut ke Level Berikutnya 💌";
+        btnAction.onclick = finishLevel;
+    } else {
+        // GAGAL
+        let msg = "";
+        if (score < 5) {
+            msg = "Waduh, kok kayak baru kenal ya? 😅 Coba lagi yuk, aku percaya kamu bisa! 💪";
+        } else {
+            msg = "Hampir! Tapi kayaknya kamu kurang fokus deh 😝 Ulangi lagi ya, pasti bisa! 💕";
+        }
+        message.innerText = msg;
+        btnAction.innerText = "Ulangi Quiz 🔄";
+        btnAction.onclick = quizGame;
+    }
+
+    container.append(scoreEl, message, btnAction);
+    document.getElementById("gameContent").innerHTML = "";
+    document.getElementById("gameContent").appendChild(container);
+}
 /* ======================
    LEVEL 3 – HEART CLICK
 ====================== */
@@ -262,6 +339,8 @@ function finishLevel() {
     if (currentLevel > 3) {
         localStorage.setItem("level", 4);
         showScreen("memory");
+        startTimeline();
+        unlockLevels();
     } else {
         showScreen("map");
         unlockLevels();
@@ -319,14 +398,12 @@ function startSparkle() {
 function typeText() {
     setTimeout(() => {
         const loveMessage = `Aku mungkin tidak sempurna,
-tapi mencintaimu adalah hal paling indah
+tapi bertemu dengan mu adalah hal indah
 yang pernah aku lakukan.
 
 Terima kasih sudah hadir,
 tertawa bersamaku,
-dan tetap di sampingku.
-
-Aku sayang kamu, selalu. ❤️`
+dan tetap di sampingku ❤️`
         const el = document.getElementById('typing-text');
         el.innerHTML = "";
         let i = 0;

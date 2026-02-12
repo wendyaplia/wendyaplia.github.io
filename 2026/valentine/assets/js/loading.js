@@ -12,7 +12,6 @@ function startLoading() {
     const screen = document.getElementById("loading");
     const text = document.getElementById("loadingText");
     let i = 0;
-
     // Ketik pesan loading
     typeLoadingText(loadingMessages[0], text, () => {
         // Ganti pesan setelah delay

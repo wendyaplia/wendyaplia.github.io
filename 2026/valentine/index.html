@@ -55,24 +55,11 @@
     <!-- 📸 MEMORY -->
     <section id="memory" class="screen">
         <h2>Memories 💕</h2>
-        <p>Kita sudah melewati semuanya...</p>
-        <button onclick="goToEnding()">Lanjut ❤️</button>
-        <div class="slider">
-            <div class="slides">
-                <div class="slide">
-                    <img src="assets/images/1.jpeg" alt="Memory Photo">
-                    <p>Senyummu favoritku</p>
-                </div>
-                <div class="slide">
-                    <img src="assets/images/2.jpeg" alt="Memory Photo">
-                    <p>Hari paling bahagia</p>
-                </div>
-                <div class="slide">
-                    <img src="assets/images/3.jpeg" alt="Memory Photo">
-                    <p>Selalu bersama ❤️</p>
-                </div>
-            </div>
-        </div>
+        <p>Setiap langkah membawa kita lebih dekat 🌸</p>
+        <div class="timeline" id="timeline"></div>
+        <br>
+        <button onclick="showScreen('map')">Lanjut ❤️</button>
+
     </section>
 
     <!-- 💘 ENDING -->
@@ -116,18 +103,43 @@
                     <div class="wish-list" id="wishList"></div>
                     <p class="letter-closing">Dengan sepenuh hati, selalu. ❤️</p>
                 </div>
+
+                <br>
+                <button onclick="showScreen('final')">Lanjut 🎁</button>
             </div>
         </div>
     </section>
 
+    <!-- 🎁 FINAL SURPRISE -->
+    <section id="final" class="screen">
+        <div class="final-wrapper">
+            <!-- Gift Box (sebelum dibuka) -->
+            <div class="gift-box" id="giftBox" onclick="openGift()">
+                <div class="gift-lid">
+                    <div class="gift-bow">🎀</div>
+                </div>
+                <div class="gift-body">🎁</div>
+                <p class="gift-hint">Ketuk untuk membuka 💕</p>
+            </div>
+
+            <!-- Pesan Surprise (setelah dibuka) -->
+            <div class="final-message hidden" id="finalMessage">
+                <h2 class="final-title">For You, My Love ❤️</h2>
+                <div class="final-content" id="finalContent"></div>
+                <button class="final-btn" onclick="restartJourney()">Mulai Lagi dari Awal 🔄</button>
+            </div>
+        </div>
+    </section>
 
     <div class="toast" id="toast"></div>
 
+    <script src="assets/js/loading.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/polaroid_wall.js"></script>
     <script src="assets/js/countdown.js"></script>
     <script src="assets/js/wish.js"></script>
-    <script src="assets/js/loading.js"></script>
+    <script src="assets/js/timeline.js"></script>
+    <script src="assets/js/final.js"></script>
 </body>
 
 </html>
