@@ -273,7 +273,7 @@ function showQuizResult(score, total) {
         }
         message.innerText = msg;
         btnAction.innerText = "Lanjut ke Level Berikutnya 💌";
-        btnAction.onclick = finishLevel(2);
+        btnAction.onclick = finishLevel;
     } else {
         // GAGAL
         let msg = "";
@@ -332,12 +332,11 @@ function heartGame() {
 /* ======================
    FINISH LEVEL
 ====================== */
-function finishLevel(lvl) {
+function finishLevel(lvl = 2) {
     currentLevel++;
     localStorage.setItem("level", currentLevel);
 
     if (lvl >=3) {
-       alert(lvl)
         localStorage.setItem("level", 4);
         showScreen("memory");
         startTimeline();
@@ -425,6 +424,7 @@ dan tetap di sampingku ❤️`
         }, 50);
     }, 3500);
 }
+
 
 
 
