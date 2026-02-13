@@ -74,7 +74,7 @@ function memoryGame() {
                     matched += 2;
                     first = null;
                     lock = false;
-                    if (matched === shuffled.length) finishLevel();
+                    if (matched === shuffled.length) finishLevel(1);
                 } else {
                     setTimeout(() => {
                         card.innerText = "❓";
@@ -273,7 +273,7 @@ function showQuizResult(score, total) {
         }
         message.innerText = msg;
         btnAction.innerText = "Lanjut ke Level Berikutnya 💌";
-        btnAction.onclick = finishLevel;
+        btnAction.onclick = finishLevel(2);
     } else {
         // GAGAL
         let msg = "";
@@ -317,7 +317,7 @@ function heartGame() {
             score++;
             if (score >= 5) {
                 clearInterval(interval);
-                finishLevel();
+                finishLevel(3);
             }
         };
 
@@ -332,11 +332,11 @@ function heartGame() {
 /* ======================
    FINISH LEVEL
 ====================== */
-function finishLevel() {
+function finishLevel(lvl) {
     currentLevel++;
     localStorage.setItem("level", currentLevel);
 
-    if (currentLevel > 3) {
+    if (lvl >=3) {
         localStorage.setItem("level", 4);
         showScreen("memory");
         startTimeline();
@@ -424,4 +424,5 @@ dan tetap di sampingku ❤️`
         }, 50);
     }, 3500);
 }
+
 
