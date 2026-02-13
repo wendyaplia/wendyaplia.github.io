@@ -12,19 +12,19 @@ const timelineData = [
         date: "Februari 2025",
         icon: "🌸",
         title: "Jalan Pertama Kita",
-        desc: "Kamu ketawa lepas sambil angkat sepatumu yang kerendem air. Detik itu aku tau — aku mau terus dengerin tawamu, lihat senyummu, bahkan di momen kacau sekalipun."
+        desc: "Kamu ketawa lepas sambil angkat sepatumu yang kerendem air. Detik itu aku tau, aku mau terus dengerin tawamu, lihat senyummu, bahkan di momen kacau sekalipun."
     },
     {
         date: "April 2025",
         icon: "💕",
         title: "Hari Kita Resmi",
-        desc: "Kamu bilang 'iya', dan duniaku langsung jadi lebih berwarna. Dari hari itu, setiap detik bersamamu terasa istimewa."
+        desc: "Aku menyatakan perasaan, dan kamu menjawab ‘iya’ saat itu juga. Permintaanmu untuk menelepon orang tuamu membuatku tahu, ini tentang keseriusan."
     },
     {
         date: "September 2025",
         icon: "🌙",
         title: "Ngobrol Sampai Pagi",
-        desc: "Kita cerita tentang mimpi, ketakutan, dan harapan masa depan. Malam itu ngobrol sampai pagi, dan aku ngerasa akhirnya punya 'rumah' — di hatimu."
+        desc: "Kita cerita tentang mimpi, ketakutan, dan harapan masa depan. Malam itu ngobrol sampai pagi, dan aku ngerasa akhirnya punya sesuatu spesial di hatimu."
     },
     {
         date: "Hari Ini",
@@ -61,3 +61,4 @@ function startTimeline() {
     });
 
 }
+
