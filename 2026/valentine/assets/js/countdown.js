@@ -1,7 +1,7 @@
 /* ======================
    COUNTDOWN
 ====================== */
-const START_DATE = new Date("2025-04-19T00:00:00");
+const START_DATE = new Date("2025-04-20T00:00:00");
 const VALENTINE_END = new Date("2026-02-14T23:59:59");
 
 function getCountdownValues() {
@@ -109,4 +109,5 @@ setInterval(() => {
 
 // Langsung tampil saat load
 updateCountdownLanding();
+
 updateCountdownEnding();
