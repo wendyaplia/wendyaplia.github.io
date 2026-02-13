@@ -337,6 +337,7 @@ function finishLevel(lvl) {
     localStorage.setItem("level", currentLevel);
 
     if (lvl >=3) {
+       alert(lvl)
         localStorage.setItem("level", 4);
         showScreen("memory");
         startTimeline();
@@ -424,5 +425,6 @@ dan tetap di sampingku ❤️`
         }, 50);
     }, 3500);
 }
+
 
 
