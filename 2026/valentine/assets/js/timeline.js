@@ -30,7 +30,7 @@ const timelineData = [
         date: "Hari Ini",
         icon: "❤️",
         title: "Cerita Kita Masih Berlanjut",
-        desc: "Setiap hari bersamamu adalah halaman baru yang aku syukuri. Terima kasih sudah jadi bagian terbaik dari hidupku, sayang."
+        desc: "Setiap hari bersamamu adalah halaman baru yang aku syukuri, dan cerita ini tetap berlanjut terus."
     }
 ];
 
@@ -59,4 +59,5 @@ function startTimeline() {
             div.classList.add("show");
         }, 300 * (i + 1));
     });
+
 }
