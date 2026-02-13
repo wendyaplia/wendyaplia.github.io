@@ -208,7 +208,7 @@ button:disabled {
     position: fixed;
     bottom: -20px;
     font-size: 20px;
-    animation-duration: calc(8s + var(--i) * 2s);
+    animation: float 12s linear infinite;
     opacity: 0.7;
 }
 
@@ -852,3 +852,4 @@ button:disabled {
     }
 
 }
+
