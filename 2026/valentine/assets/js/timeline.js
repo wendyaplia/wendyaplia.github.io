@@ -18,7 +18,7 @@ const timelineData = [
         date: "April 2025",
         icon: "💕",
         title: "Hari Kita Resmi",
-        desc: "Aku menyatakan perasaan, dan kamu menjawab ‘iya’ saat itu juga. Permintaanmu untuk menelepon orang tuamu membuatku tahu, ini tentang keseriusan."
+        desc: "Aku menyatakan perasaan, dan kamu menjawab ‘iya’ saat itu juga. Permintaanmu untuk menelepon orang tuamu membuatku tahu, ini tentang keseriusan sambil menunggu ayam 1 ekor."
     },
     {
         date: "September 2025",
@@ -61,4 +61,5 @@ function startTimeline() {
     });
 
 }
+
 
