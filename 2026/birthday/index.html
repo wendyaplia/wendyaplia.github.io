@@ -1212,8 +1212,8 @@
                         <div class="vinyl-ring" style="width:60px;height:60px;"></div>
                         <div class="vinyl-center"></div>
                     </div>
-                    <div class="song-title">A Thousand Years</div>
-                    <div class="song-artist">Christina Perri</div>
+                    <div class="song-title">Kenangan Terindah</div>
+                    <div class="song-artist"></div>
                     <div class="music-controls">
                         <button class="ctrl-btn main" id="playBtn" onclick="togglePlay()">▶</button>
                     </div>
@@ -1366,63 +1366,58 @@
 
         // ── COUNTDOWN + LOCK/UNLOCK LOGIC ──
 
-(function () {
+        (function () {
 
-    let birthdayUnlocked = false;
+            let birthdayUnlocked = false;
 
-    function getTarget() {
-        const now = new Date();
-        return new Date(now.getFullYear(), 3, 19, 0, 0, 0);
-    }
+            function getTarget() {
+                const now = new Date();
+                return new Date(now.getFullYear(), 3, 19, 0, 0, 0);
+            }
 
-    const target = getTarget();
-console.log({
-    now: new Date(),
-    target,
-    diff
-});
-    function unlock() {
-       if (!birthdayUnlocked && diff <= 0) {
-    unlock();
-}
+            const target = getTarget();
+            function unlock() {
+                if (birthdayUnlocked) {
+                    return;
+                }
 
-        birthdayUnlocked = true;
+                birthdayUnlocked = true;
 
-        document.getElementById('lockedGate').style.display = 'none';
-        document.getElementById('unlockedContent').classList.add('visible');
+                document.getElementById('lockedGate').style.display = 'none';
+                document.getElementById('unlockedContent').classList.add('visible');
 
-        document.getElementById('cdGrid').style.display = 'none';
-        document.getElementById('birthday-msg').style.display = 'block';
-        document.getElementById('cdHeading').textContent =
-            '🎉 Hari Istimewamu Telah Tiba! 🎉';
+                document.getElementById('cdGrid').style.display = 'none';
+                document.getElementById('birthday-msg').style.display = 'block';
+                document.getElementById('cdHeading').textContent =
+                    '🎉 Hari Istimewamu Telah Tiba! 🎉';
 
-        launchConfetti();
-    }
+                launchConfetti();
+            }
 
-    function tick() {
-        const now = new Date();
-        const diff = target - now;
+            function tick() {
+                const now = new Date();
+                const diff = target - now;
 
-        if (diff <= 0) {
-            unlock();
-            return;
-        }
+                if (diff <= 0) {
+                    unlock();
+                    return;
+                }
 
-        document.getElementById('cd-d').textContent =
-            Math.floor(diff / 86400000);
-        document.getElementById('cd-h').textContent =
-            Math.floor((diff % 86400000) / 3600000);
-        document.getElementById('cd-m').textContent =
-            Math.floor((diff % 3600000) / 60000);
-        document.getElementById('cd-s').textContent =
-            Math.floor((diff % 60000) / 1000);
-    }
+                document.getElementById('cd-d').textContent =
+                    Math.floor(diff / 86400000);
+                document.getElementById('cd-h').textContent =
+                    Math.floor((diff % 86400000) / 3600000);
+                document.getElementById('cd-m').textContent =
+                    Math.floor((diff % 3600000) / 60000);
+                document.getElementById('cd-s').textContent =
+                    Math.floor((diff % 60000) / 1000);
+            }
 
-    // START TIMER
-    tick();
-    setInterval(tick, 1000);
+            // START TIMER
+            tick();
+            setInterval(tick, 1000);
 
-})();
+        })();
 
 
 
