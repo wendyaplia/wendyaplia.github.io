@@ -1407,7 +1407,7 @@
     const now = new Date();
     const diff = target - now;
 
-    if (diff <= 0) {
+    if (diff <= 1000) {
         unlock();
         return; // 🚨 STOP di sini
     }
