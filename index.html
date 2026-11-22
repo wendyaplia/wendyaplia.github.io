@@ -860,6 +860,7 @@
 </head>
 
 <body>
+    <audio id="bg-audio" src="tentang-kita.mp3" type="audio/mp4" loop preload="auto"></audio>
     <div id="stars"></div>
     <div id="cursor"></div>
     <div id="cursor-ring"></div>
@@ -1068,6 +1069,34 @@
     </div><!-- .page -->
 
     <script>
+         // Autoplay saat user pertama interaksi
+        const audio = document.getElementById('bg-audio');
+
+        function playAudio() {
+            // Pastikan audio dicoba putar kembali jika sempat gagal
+            audio.play()
+                .then(() => {
+                    cleanUpListeners();
+                })
+                .catch((error) => {
+                    console.log("Gagal memutar otomatis, menunggu interaksi pengguna nyata:", error);
+                });
+        }
+
+        function cleanUpListeners() {
+            // Hanya hapus listener jika audio BENAR-BENAR sukses berputar
+            document.removeEventListener('click', playAudio);
+            document.removeEventListener('touchstart', playAudio);
+            document.removeEventListener('keydown', playAudio);
+        }
+
+        // 1. Coba putar otomatis langsung saat halaman selesai dimuat (jika diizinkan browser)
+        window.addEventListener('DOMContentLoaded', () => {
+            // Pastikan file audio sudah ter-load sedikit
+            audio.load();
+            playAudio();
+        });
+        
         // ── CUSTOM CURSOR ──
         const cursor = document.getElementById('cursor');
         const ring = document.getElementById('cursor-ring');
