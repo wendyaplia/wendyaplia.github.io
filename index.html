@@ -180,9 +180,47 @@
             }
         }
 
+        @keyframes music-pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(232, 133, 58, 0.35);
+            }
+
+            50% {
+                box-shadow: 0 0 0 10px rgba(232, 133, 58, 0);
+            }
+        }
+
         .page {
             position: relative;
             z-index: 2;
+        }
+
+        /* ── MUSIC BUTTON ── */
+        #music-btn {
+            position: fixed;
+            bottom: 1.2rem;
+            right: 1.2rem;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--cream);
+            font-size: 1.1rem;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, border-color 0.3s;
+        }
+
+        #music-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--tiger);
+        }
+
+        #music-btn.playing {
+            animation: music-pulse 2.4s ease-in-out infinite;
         }
 
         /* ── HERO ── */
@@ -860,10 +898,14 @@
 </head>
 
 <body>
-    <audio id="bg-audio" src="tentang-kita.mp3" type="audio/mp4" loop preload="auto"></audio>
+    <!-- type="audio/mp4" dihapus: salah untuk file .mp3 -->
+    <audio id="bg-audio" src="tentang-kita.mp3" loop preload="auto"></audio>
     <div id="stars"></div>
     <div id="cursor"></div>
     <div id="cursor-ring"></div>
+
+    <!-- Tombol musik -->
+    <button id="music-btn" type="button" aria-label="Putar musik">🎵</button>
 
     <div class="page">
 
@@ -1069,34 +1111,62 @@
     </div><!-- .page -->
 
     <script>
-         // Autoplay saat user pertama interaksi
+        // ── AUDIO ──
         const audio = document.getElementById('bg-audio');
+        const musicBtn = document.getElementById('music-btn');
+        audio.volume = 0.6;
+
+        // true jika pengguna sengaja menekan pause lewat tombol
+        let pausedByUser = false;
+
+        const interactionEvents = ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+
+        function removeListeners() {
+            interactionEvents.forEach(evt => document.removeEventListener(evt, playAudio));
+        }
 
         function playAudio() {
-            // Pastikan audio dicoba putar kembali jika sempat gagal
+            if (pausedByUser) return;
             audio.play()
-                .then(() => {
-                    cleanUpListeners();
-                })
-                .catch((error) => {
-                    console.log("Gagal memutar otomatis, menunggu interaksi pengguna nyata:", error);
-                });
+                .then(removeListeners)
+                .catch(() => { /* diblokir browser, tunggu interaksi berikutnya */ });
         }
 
-        function cleanUpListeners() {
-            // Hanya hapus listener jika audio BENAR-BENAR sukses berputar
-            document.removeEventListener('click', playAudio);
-            document.removeEventListener('touchstart', playAudio);
-            document.removeEventListener('keydown', playAudio);
-        }
+        // 1. Coba autoplay langsung (kemungkinan diblokir browser)
+        window.addEventListener('DOMContentLoaded', playAudio);
 
-        // 1. Coba putar otomatis langsung saat halaman selesai dimuat (jika diizinkan browser)
-        window.addEventListener('DOMContentLoaded', () => {
-            // Pastikan file audio sudah ter-load sedikit
-            audio.load();
-            playAudio();
+        // 2. Fallback: putar saat interaksi pertama pengguna
+        interactionEvents.forEach(evt =>
+            document.addEventListener(evt, playAudio, { passive: true })
+        );
+
+        // 3. Tombol play/pause
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (audio.paused) {
+                pausedByUser = false;
+                audio.play().catch(() => { });
+            } else {
+                pausedByUser = true;
+                audio.pause();
+            }
         });
-        
+
+        // 4. Sinkronkan tampilan tombol dengan status audio
+        audio.addEventListener('play', () => {
+            musicBtn.textContent = '🎵';
+            musicBtn.classList.add('playing');
+            musicBtn.setAttribute('aria-label', 'Jeda musik');
+        });
+        audio.addEventListener('pause', () => {
+            musicBtn.textContent = '🔇';
+            musicBtn.classList.remove('playing');
+            musicBtn.setAttribute('aria-label', 'Putar musik');
+        });
+
+        // Tampilan awal: musik belum berbunyi
+        musicBtn.textContent = '🔇';
+
         // ── CUSTOM CURSOR ──
         const cursor = document.getElementById('cursor');
         const ring = document.getElementById('cursor-ring');
